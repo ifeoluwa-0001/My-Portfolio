@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Victor Adimoh Ifeoluwa — Backend Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #0d0f12;
+    --bg-panel: #15181c;
+    --bg-panel-2: #1b1f24;
+    --border: #2a2e33;
+    --text: #ece9e4;
+    --text-muted: #868b93;
+    --text-dim: #565b62;
+    --accent: #d4a15c;
+    --accent-dim: #8a6a3f;
+    --teal: #5b9aa0;
+  }
+
+  *{ box-sizing: border-box; margin:0; padding:0; }
+
+  html{ scroll-behavior: smooth; }
+
+  body{
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', -apple-system, sans-serif;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  ::selection{ background: var(--accent); color: var(--bg); }
+
+  a{ color: inherit; text-decoration: none; }
+
+  .mono{ font-family: 'JetBrains Mono', monospace; }
+
+  .wrap{
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 0 28px;
+  }
+
+  /* ---------- Nav ---------- */
+  nav{
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(13,15,18,0.85);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+  }
+  nav .wrap{
+    display:flex; align-items:center; justify-content:space-between;
+    height: 64px;
+  }
+  .nav-brand{ font-family:'JetBrains Mono',monospace; font-size:14px; color:var(--text); font-weight:600; }
+  .nav-brand span{ color: var(--accent); }
+  .nav-links{ display:flex; gap: 28px; list-style:none; }
+  .nav-links a{
+    font-family:'JetBrains Mono',monospace;
+    font-size: 13px;
+    color: var(--text-muted);
+    transition: color .15s ease;
+  }
+  .nav-links a:hover{ color: var(--accent); }
+  .nav-links a:focus-visible{ outline: 1px solid var(--accent); outline-offset: 4px; }
+  @media (max-width: 640px){ .nav-links{ display:none; } }
+
+  /* ---------- Hero / terminal ---------- */
+  header.hero{
+    padding: 96px 0 72px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .eyebrow{
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .eyebrow::before{
+    content: '';
+    width: 6px; height: 6px;
+    background: var(--accent);
+    border-radius: 50%;
+    display: inline-block;
+  }
+
+  h1{
+    font-family:'JetBrains Mono', monospace;
+    font-size: clamp(28px, 5vw, 44px);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin-bottom: 12px;
+  }
+  .hero-role{
+    color: var(--text-muted);
+    font-size: 17px;
+    max-width: 520px;
+    margin-bottom: 40px;
+  }
+
+  .terminal{
+    background: var(--bg-panel);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 20px 60px -20px rgba(0,0,0,0.6);
+  }
+  .terminal-bar{
+    display:flex; align-items:center; gap:8px;
+    padding: 12px 16px;
+    background: var(--bg-panel-2);
+    border-bottom: 1px solid var(--border);
+  }
+  .dot{ width:10px; height:10px; border-radius:50%; }
+  .dot.red{ background:#e0605a; }
+  .dot.yellow{ background:#e0b95a; }
+  .dot.green{ background:#5ec26a; }
+  .terminal-title{
+    margin-left: 8px;
+    font-family:'JetBrains Mono',monospace;
+    font-size: 12px;
+    color: var(--text-dim);
+  }
+  .terminal-body{
+    padding: 22px 20px 26px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 14px;
+    min-height: 168px;
+  }
+  .terminal-line{ margin-bottom: 10px; white-space: pre-wrap; word-break: break-word; }
+  .prompt{ color: var(--teal); }
+  .cmd{ color: var(--text); }
+  .out{ color: var(--text-muted); }
+  .cursor{
+    display:inline-block;
+    width: 8px; height: 16px;
+    background: var(--accent);
+    vertical-align: text-bottom;
+    animation: blink 1s step-end infinite;
+  }
+  @keyframes blink{ 50%{ opacity: 0; } }
+
+  .cta-row{ display:flex; gap: 14px; margin-top: 32px; flex-wrap: wrap; }
+  .btn{
+    font-family:'JetBrains Mono',monospace;
+    font-size: 13px;
+    padding: 11px 20px;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+    transition: border-color .15s ease, background .15s ease;
+  }
+  .btn-primary{ background: var(--accent); color: var(--bg); border-color: var(--accent); font-weight:600; }
+  .btn-primary:hover{ background: #e0af6c; }
+  .btn-ghost{ color: var(--text); }
+  .btn-ghost:hover{ border-color: var(--accent); color: var(--accent); }
+  .btn:focus-visible{ outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  /* ---------- Sections ---------- */
+  section{ padding: 72px 0; border-bottom: 1px solid var(--border); }
+
+  .section-head{ margin-bottom: 36px; }
+  .section-head .eyebrow::before{ display:none; }
+  h2{
+    font-family:'JetBrains Mono', monospace;
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--text);
+  }
+
+  /* About */
+  .about-body{ color: var(--text-muted); max-width: 620px; font-size: 15.5px; }
+  .about-body strong{ color: var(--text); font-weight: 600; }
+  .meta-row{
+    display:flex; gap: 28px; margin-top: 28px; flex-wrap: wrap;
+    font-family:'JetBrains Mono',monospace; font-size: 13px;
+  }
+  .meta-item .k{ color: var(--text-dim); display:block; font-size:11px; letter-spacing:.08em; text-transform:uppercase; margin-bottom:4px; }
+  .meta-item .v{ color: var(--text); }
+
+  /* Skills */
+  .skill-group{ margin-bottom: 24px; }
+  .skill-group:last-child{ margin-bottom: 0; }
+  .skill-group .k{
+    font-family:'JetBrains Mono',monospace; font-size: 12px; color: var(--text-dim);
+    letter-spacing: .08em; text-transform: uppercase; margin-bottom: 12px;
+  }
+  .pill-row{ display:flex; flex-wrap: wrap; gap: 10px; }
+  .pill{
+    font-family:'JetBrains Mono',monospace;
+    font-size: 13px;
+    padding: 7px 14px;
+    border: 1px solid var(--border);
+    border-radius: 5px;
+    color: var(--text-muted);
+    background: var(--bg-panel);
+  }
+
+  /* Projects */
+  .project-card{
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--bg-panel);
+    margin-bottom: 18px;
+    overflow: hidden;
+    transition: border-color .15s ease;
+  }
+  .project-card:hover{ border-color: var(--accent-dim); }
+  .project-head{
+    padding: 18px 22px;
+    border-bottom: 1px solid var(--border);
+    display:flex; align-items:center; justify-content:space-between; gap: 16px; flex-wrap: wrap;
+  }
+  .project-path{
+    font-family:'JetBrains Mono',monospace; font-size: 13px; color: var(--accent);
+  }
+  .project-link{
+    font-family:'JetBrains Mono',monospace; font-size: 12px; color: var(--text-muted);
+    border: 1px solid var(--border); padding: 5px 12px; border-radius: 5px;
+    transition: color .15s ease, border-color .15s ease;
+  }
+  .project-link:hover{ color: var(--accent); border-color: var(--accent-dim); }
+  .project-body{ padding: 20px 22px 22px; }
+  .project-title{ font-size: 17px; font-weight: 600; margin-bottom: 8px; }
+  .project-desc{ color: var(--text-muted); font-size: 14.5px; margin-bottom: 16px; }
+  .tag-row{ display:flex; flex-wrap: wrap; gap: 8px; }
+  .tag{
+    font-family:'JetBrains Mono',monospace; font-size: 11.5px;
+    color: var(--teal); background: rgba(91,154,160,0.08);
+    border: 1px solid rgba(91,154,160,0.25);
+    padding: 4px 10px; border-radius: 4px;
+  }
+
+  /* Contact */
+  .contact-grid{ display:flex; gap: 16px; flex-wrap: wrap; }
+  .contact-card{
+    flex: 1; min-width: 220px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 20px;
+    background: var(--bg-panel);
+  }
+  .contact-card .k{
+    font-family:'JetBrains Mono',monospace; font-size: 11px; color: var(--text-dim);
+    letter-spacing: .08em; text-transform: uppercase; margin-bottom: 8px;
+  }
+  .contact-card .v{ font-family:'JetBrains Mono',monospace; font-size: 14px; color: var(--text); }
+  .contact-card .v:hover{ color: var(--accent); }
+
+  footer{ padding: 32px 0 48px; }
+  footer .wrap{
+    display:flex; justify-content: space-between; align-items:center; flex-wrap: wrap; gap: 12px;
+    font-family:'JetBrains Mono',monospace; font-size: 12px; color: var(--text-dim);
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior: auto; }
+    .cursor{ animation: none; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <div class="nav-brand">victor<span>@</span>dev</div>
+    <ul class="nav-links">
+      <li><a href="#about">~/about</a></li>
+      <li><a href="#skills">~/skills</a></li>
+      <li><a href="#learning">~/learning</a></li>
+      <li><a href="#projects">~/projects</a></li>
+      <li><a href="#contact">~/contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <h1>Victor Adimoh Ifeoluwa</h1>
+    <p class="hero-role">Backend Developer with Data Skills building scalable APIs, databases.</p>
+
+    <div class="terminal">
+      <div class="terminal-bar">
+        <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
+        <span class="terminal-title">victor@dev — zsh</span>
+      </div>
+      <div class="terminal-body" id="termBody"></div>
+    </div>
+
+    <div class="cta-row">
+      <a href="#projects" class="btn btn-primary">View projects</a>
+      <a href="https://github.com/ifeoluwa-0001" target="_blank" rel="noopener" class="btn btn-ghost">GitHub ↗</a>
+      <a href="https://drive.google.com/file/d/1mtzKO88I6cLjhFDjdKQBDDbngIwp5gYk/view?usp=drivesdk" target="_blank" rel="noopener" class="btn btn-ghost">Resume ↗</a>
+      <a href="#contact" class="btn btn-ghost">Get in touch</a>
+    </div>
+  </div>
+</header>
+
+<section id="about">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow mono">~/about</div>
+      <h2>A little context</h2>
+    </div>
+    <p class="about-body">
+      I'm a <strong>Computer Science student at Olabisi Onabanjo University</strong>, expected to graduate in <strong>July 2027</strong>. My interest sits on the server side — authentication flows, APIs, and the systems that quietly keep everything running. Outside of coursework, I like taking things down to the socket level in C, and leading small teams through scrappy CLI projects.
+    </p>
+    <div class="meta-row">
+      <div class="meta-item"><span class="k">Location</span><span class="v">Lagos, Nigeria</span></div>
+      <div class="meta-item"><span class="k">Focus</span><span class="v">Backend Engineering</span></div>
+      <div class="meta-item"><span class="k">Education</span><span class="v">B.Sc. CS, OOU — Class of 2027</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow mono">~/skills</div>
+      <h2>Stack &amp; tools</h2>
+    </div>
+
+    <div class="skill-group">
+      <div class="k">Languages</div>
+      <div class="pill-row">
+        <span class="pill">Node.js</span>
+        <span class="pill">C / C++</span>
+        <span class="pill">PHP</span>
+        <span class="pill">SQL</span>
+        <span class="pill">Python</span>
+        <span class="pill">Java</span>
+      </div>
+    </div>
+
+    <div class="skill-group">
+      <div class="k">Backend &amp; APIs</div>
+      <div class="pill-row">
+        <span class="pill">JWT Authentication</span>
+        <span class="pill">bcrypt</span>
+        <span class="pill">REST APIs</span>
+        <span class="pill">CORS</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="learning">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow mono">~/learning</div>
+      <h2>Currently learning</h2>
+    </div>
+    <div class="pill-row">
+      <span class="pill">Docker</span>
+      <span class="pill">Jest</span>
+      <span class="pill">Redis</span>
+      <span class="pill">Power BI</span>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow mono">~/projects</div>
+      <h2>Selected work</h2>
+    </div>
+
+    <div class="project-card">
+      <div class="project-head">
+        <span class="project-path">~/projects/ecommerce-platform</span>
+        <a href="https://github.com/ifeoluwa-0001" target="_blank" rel="noopener" class="project-link">Repo</a>
+      </div>
+      <div class="project-body">
+        <div class="project-title">Node.js E-Commerce Platform</div>
+        <p class="project-desc">Built a RESTful backend for an e-commerce platform featuring JWT authentication, secure password hashing with bcrypt, product management, user authorization, and cross-origin communication for frontend integration.</p>
+        <div class="tag-row">
+          <span class="tag">Node.js</span>
+          <span class="tag">Express</span>
+          <span class="tag">JWT</span>
+          <span class="tag">bcrypt</span>
+          <span class="tag">REST API</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-head">
+        <span class="project-path">~/projects/tcp-client</span>
+        <a href="https://github.com/ifeoluwa-0001" target="_blank" rel="noopener" class="project-link">Repo</a>
+      </div>
+      <div class="project-body">
+        <div class="project-title">TCP Client in C</div>
+        <p class="project-desc">Built a TCP client in C that communicates with a remote server using the Sockets API. Built the application from the ground up to strengthen my understanding of socket programming, network protocols, and low-level systems development.</p>
+        <div class="tag-row">
+          <span class="tag">C</span>
+          <span class="tag">Sockets</span>
+          <span class="tag">TCP/IP</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-head">
+        <span class="project-path">~/projects/cli-tic-tac-toe</span>
+        <a href="https://github.com/ifeoluwa-0001" target="_blank" rel="noopener" class="project-link">Repo</a>
+      </div>
+      <div class="project-body">
+        <div class="project-title">CLI Tic-Tac-Toe — Tech Lead</div>
+        <p class="project-desc">A command-line tic-tac-toe game, built while leading a small development team. Covers game logic, turn handling, and win-condition checks behind a clean terminal interface.</p>
+        <div class="tag-row">
+          <span class="tag">C</span>
+          <span class="tag">Team Leadership</span>
+          <span class="tag">CLI Design</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-head">
+        <span class="project-path">~/projects/nyc-collisions-eda</span>
+        <a href="https://colab.research.google.com/drive/14pw5QQ_C9FU5SiFWWriPzwMXxyMdVaSQ?usp=drive_link" target="_blank" rel="noopener" class="project-link">Notebook</a>
+      </div>
+      <div class="project-body">
+        <div class="project-title">NYC Motor Vehicle Collisions</div>
+        <p class="project-desc">Analyzed over 2 million NYC collision records, identifying hourly crash trends, borough hotspots, and major contributing factors using Python, Pandas, and Matplotlib.</p>
+        <div class="tag-row">
+          <span class="tag">Python</span>
+          <span class="tag">Pandas</span>
+          <span class="tag">Matplotlib</span>
+          <span class="tag">Seaborn</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section id="contact" style="border-bottom:none;">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow mono">~/contact</div>
+      <h2>Let's talk</h2>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-card">
+        <div class="k">Email</div>
+        <a class="v" href="mailto:Victorisreal07@gmail.com">Victorisreal07@gmail.com</a>
+      </div>
+      <div class="contact-card">
+        <div class="k">GitHub</div>
+        <a class="v" href="https://github.com/ifeoluwa-0001" target="_blank" rel="noopener">github.com/ifeoluwa-0001</a>
+      </div>
+      <div class="contact-card">
+        <div class="k">Based in</div>
+        <span class="v">Lagos, Nigeria</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 Victor Adimoh Ifeoluwa</span>
+    <span>Designed and developed by Victor Adimoh Ifeoluwa</span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  const lines = [
+    { type: 'cmd', text: 'whoami' },
+    { type: 'out', text: 'Victor Adimoh Ifeoluwa — Backend Engineer' },
+    { type: 'cmd', text: 'cat focus.txt' },
+    { type: 'out', text: 'Node.js · C/C++ · SQL · REST APIs · Systems' },
+    { type: 'cmd', text: './open_to_work.sh' },
+    { type: 'out', text: 'Status: open to backend roles & internships' }
+  ];
+  const body = document.getElementById('termBody');
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function renderStatic(){
+    body.innerHTML = '';
+    lines.forEach(l => {
+      const div = document.createElement('div');
+      div.className = 'terminal-line';
+      if(l.type === 'cmd'){
+        div.innerHTML = '<span class="prompt">victor@dev:~$</span> <span class="cmd">' + l.text + '</span>';
+      } else {
+        div.innerHTML = '<span class="out">' + l.text + '</span>';
+      }
+      body.appendChild(div);
+    });
+  }
+
+  if(reduce){
+    renderStatic();
+    return;
+  }
+
+  let li = 0;
+  function typeLine(){
+    if(li >= lines.length){
+      const cursorDiv = document.createElement('span');
+      cursorDiv.className = 'cursor';
+      body.appendChild(cursorDiv);
+      return;
+    }
+    const l = lines[li];
+    const div = document.createElement('div');
+    div.className = 'terminal-line';
+    body.appendChild(div);
+
+    if(l.type === 'out'){
+      div.innerHTML = '<span class="out">' + l.text + '</span>';
+      li++;
+      setTimeout(typeLine, 380);
+      return;
+    }
+
+    let ci = 0;
+    const prompt = document.createElement('span');
+    prompt.className = 'prompt';
+    prompt.textContent = 'victor@dev:~$ ';
+    div.appendChild(prompt);
+    const cmdSpan = document.createElement('span');
+    cmdSpan.className = 'cmd';
+    div.appendChild(cmdSpan);
+
+    const interval = setInterval(() => {
+      cmdSpan.textContent += l.text[ci];
+      ci++;
+      if(ci >= l.text.length){
+        clearInterval(interval);
+        li++;
+        setTimeout(typeLine, 260);
+      }
+    }, 38);
+  }
+
+  typeLine();
+})();
+</script>
+
+</body>
+</html>
